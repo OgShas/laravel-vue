@@ -38,7 +38,7 @@ const submit = () => {
         </div>
 
         <form @submit.prevent="submit">
-            <div>
+            <div class="container px-4 mt-6">
                 <InputLabel for="email" value="Email" />
 
                 <TextInput
@@ -54,7 +54,7 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
-            <div class="mt-4">
+            <div class="container mt-4 px-4">
                 <InputLabel for="password" value="Password" />
 
                 <TextInput
@@ -69,14 +69,14 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
-            <div class="block mt-4">
-                <label class="flex items-center">
+            <div class="container block mt-4">
+                <label class="flex items-center px-4">
                     <Checkbox name="remember" v-model:checked="form.remember" />
                     <span class="ms-2 text-sm text-gray-600">Remember me</span>
                 </label>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="container flex items-center justify-end mt-4 px-4">
                 <Link
                     v-if="canResetPassword"
                     :href="route('password.request')"
