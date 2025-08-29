@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CategoryController extends Controller
 {
@@ -35,7 +37,11 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $category = Category::with('products')->findOrFail($id);
+
+        return inertia::render('Category/Show', [
+            'category' => $category,
+        ]);
     }
 
     /**

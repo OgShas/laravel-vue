@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Category;
 use App\Models\Product;
@@ -39,4 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::get('products/{id}', [ProductController::class, 'show'])->name('products.show');
+Route::get('categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
+
+require __DIR__ . '/auth.php';
