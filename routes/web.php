@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
+use App\Http\Middleware\adminMiddleware;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Foundation\Application;
@@ -39,6 +42,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware(AdminMiddleware::class)->prefix('admin')->name('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+    Route::resource('products', ProductController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('categories', CategoryController::class);
 });
 
 Route::get('products', [ProductController::class, 'index'])->name('products.index');
